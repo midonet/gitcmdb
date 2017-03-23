@@ -3,11 +3,11 @@
 
 CMDB system where CMDB server is git server (for example GitHub)
 
-Every defined number of seconds hosts connect to Github to update a specific branch of a repo and execute a list of installers only in case this brach has been updated.
+Every defined number of seconds, hosts connect to Github to update a specific branch of a repo and execute a list of installers only in case this branch has been updated.
 
 Currently the only supported installers are puppet and simple bash scripts. New installers can be added easily.
 
-Multiple installers can be executed in the same host and at the same cron execution. So you can mix for example bash for some tasks and puppet for other more complex tasks.
+Multiple installers can be executed in the same host and at the same cron execution sequence. So you can mix for example bash for some tasks and puppet for other more complex tasks.
 
 
 ## Installation
