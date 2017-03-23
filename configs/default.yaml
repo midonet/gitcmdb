@@ -1,5 +1,5 @@
 cronfrequency: 5
 installers: "bash puppet"
-installerrepo: https://github.com/txtmode/gitcmdb-puppet.git
+installerrepo: https://github.com/midonet/gitcmdb-data.git
 branch: master
 key: provisioning

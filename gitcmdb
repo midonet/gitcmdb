@@ -1,7 +1,7 @@
 #!/bin/bash
 # Usage: gitcmdb <gitcmdb_repo> <gitcmdb_path>
 # Defaults:
-#   gitdmdb_repo = 'https://github.com/txtmode/gitcmdb'
+#   gitdmdb_repo = 'https://github.com/midonet/gitcmdb'
 #   gitcmdb_path = '/opt'
 
 parse_yaml() {
@@ -43,7 +43,7 @@ check_git() {
 if ! mkdir /tmp/gitcmdb.lock 2>/dev/null; then exit 0; fi
 
 # Check params or set defaults values
-if [ "$1" = '' ]; then export gitcmdb_repo='https://github.com/txtmode/gitcmdb'; else export gitcmdb_repo="$1"; fi
+if [ "$1" = '' ]; then export gitcmdb_repo='https://github.com/midonet/gitcmdb'; else export gitcmdb_repo="$1"; fi
 if [ "$2" = '' ]; then export gitcmdb_path='/opt'; else export gitcmdb_path="$2"; fi
 
 # Detect role and instance name

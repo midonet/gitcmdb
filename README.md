@@ -13,10 +13,10 @@ Multiple installers can be executed in the same host and at the same cron execut
 ## Installation
 
 ```
-wget --quiet 'https://raw.githubusercontent.com/txtmode/gitcmdb/master/gitcmdb?' -O - | bash -s <repo> <install folder>
+wget --quiet 'https://raw.githubusercontent.com/midonet/gitcmdb/master/gitcmdb?' -O - | bash -s <repo> <install folder>
 ```
 where:
-* repo is your repo, default https://github.com/txtmode/gitcmdb
+* repo is your repo, default https://github.com/midonet/gitcmdb
 * install folder is where to clone the repo, by default /opt
 
 Supported Distributions:
