@@ -1,0 +1,5 @@
+cronfrequency: 5
+installers: "bash puppet"
+installerrepo: https://github.com/txtmode/gitcmdb-puppet.git
+branch: master
+key: provisioning

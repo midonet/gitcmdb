@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# default script
+if [ -e "$gitcmdb_path/gitcmdb_installer/bash/scripts/default.sh" ] ; then
+  sudo "$gitcmdb_path/gitcmdb_installer/bash/scripts/default.sh"
+fi
+
+# role script
+if [ -e "$gitcmdb_path/gitcmdb_installer/bash/scripts/$role.sh" ] ; then
+  sudo "$gitcmdb_path/gitcmdb_installer/bash/scripts/$role.sh"
+fi
+
+# instance script
+if [ -e "$gitcmdb_path/gitcmdb_installer/bash/scripts/$role/$instance.sh" ] ; then
+  sudo "$gitcmdb_path/gitcmdb_installer/bash/scripts/$role/$instance.sh"
+fi

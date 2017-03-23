@@ -1,0 +1,48 @@
+#!/bin/bash
+# Expected environment variables
+# * role (first part of the hostname)
+# * instance (second part of the hostname)
+# * gitcmdb_path (folder where repo was downloaded)
+echo Running puppet installer
+
+# check if puppet is installed
+if [ ! -e /usr/bin/puppet ]; then
+  if [ -e /etc/redhat_release ]; then
+    sudo /bin/yum -y install puppet
+  elif [ -e /etc/debian_version ]; then
+    sudo /usr/bin/apt-get -y install puppet
+  else
+     echo "Unsuported distribution"
+     return 1
+  fi
+fi
+
+#check if r10k is installed
+if [ ! -e /usr/local/bin/r10k ]; then
+  sudo gem install r10k
+fi
+
+# check /etc/puppet link
+if [ ! "$(readlink /etc/puppet)" = "$gitcmdb_path/gitcmdb_installer/puppet" ]; then
+  sudo mv -f /etc/puppet /etc/puppet.`date +%s`
+  sudo ln -sf $gitcmdb_path/gitcmdb_installer/puppet /etc/puppet
+fi
+
+# check /etc/facter/facts.d link
+sudo mkdir -p /etc/facter
+if [ ! "$(readlink /etc/facter/facts.d)" = "$gitcmdb_path/gitcmdb_installer/puppet/facts.d" ]; then
+  sudo mv -f /etc/facter/facts.d /etc/facter/facts.d.`date +%s`
+  sudo ln -sf $gitcmdb_path/gitcmdb_installer/puppet/facts.d /etc/facter/facts.d
+fi
+
+# install Puppetfile modules
+if [ -e /etc/puppet/Puppetfile -a -e /etc/puppet/modules ]; then
+  sudo /usr/local/bin/r10k puppetfile install --puppetfile /etc/puppet/Puppetfile --moduledir /etc/puppet/puppetfile-modules
+fi
+
+# run puppet
+if [ -e /etc/puppet/manifests/site.pp ]; then
+  sudo /usr/bin/puppet apply --modulepath modules:puppetfile-modules /etc/puppet/manifests/site.pp
+else
+  echo "File /etc/puppet/manifests/site.pp does not exist"
+fi
