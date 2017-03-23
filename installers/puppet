@@ -42,7 +42,7 @@ fi
 
 # run puppet
 if [ -e /etc/puppet/manifests/site.pp ]; then
-  sudo /usr/bin/puppet apply --modulepath modules:puppetfile-modules /etc/puppet/manifests/site.pp
+  sudo /usr/bin/puppet apply --modulepath /etc/puppet/modules:/etc/puppet/puppetfile-modules /etc/puppet/manifests/site.pp
 else
   echo "File /etc/puppet/manifests/site.pp does not exist"
 fi
