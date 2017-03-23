@@ -35,9 +35,9 @@ Supported Distributions:
 * CentOS/RHEL
 
 ## Usage
-Define hostnames of hosts like *role*-*instance*-*whatever*.*domain*
+When creating hosts, define hostnames like *role*-*instance*-*whatever*.*domain*
 
-Configuration variables will be load from:
+Configuration variables will be load from in your github repo (hiera like):
 * config/default.yaml
 * config/*role*/default.yaml
 * config/*role*/*instance*.yaml
