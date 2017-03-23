@@ -20,7 +20,7 @@ Multiple installers can be executed in the same host and at the same cron execut
 installerrepo: https://USER:PASS@github.com/ORGANIZATION/gitcmdb-data
 ...
 ```
-* Optional: update this README.md file in your repo to update next section credentials to your bot credentials
+* Optional: update this README.md file in your repo to update next section credentials to your bot credentials, so you can read this readme and Copy&Paste.
 ### Server installation (to be done in all servers only once when enrolling to gitcmdb)
 ```
 wget --quiet 'https://raw.githubusercontent.com/midonet/gitcmdb/master/gitcmdb?' -O - | bash -s https://USER:PASSWORD@github.com/ORGANIZATION/gitcmdb
