@@ -53,7 +53,7 @@ It's quite similar to r10k usage, every host has an specific repo (gitcmdb_insta
 * hiera is enabled, hiera.yaml is also versioned for every repository branch
 * puppet apply is executed to load manifests/site.pp
 * By default hiera loads class ::roles::*role*
-* External facts from `facts.d` are copied to `/etc/facter/facts.d` so they can also be used
+* External facts from `facts.d` are linked to `/etc/facter/facts.d` so they can also be used
 
 ### Bash
 All variables in yaml config will be loaded as environment variables.
