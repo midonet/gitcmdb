@@ -58,9 +58,9 @@ It's quite similar to r10k usage, every host has an specific repo (gitcmdb_insta
 ### Bash
 All variables in yaml config will be loaded as environment variables.
 If found those scripts are executed in that order:
-* bashscripts/default.sh
-* bashscripts/*role*.sh
-* bashscripts/*role*/*instance*.sh
+* bash/scripts/default.sh
+* bash/scripts/*role*.sh
+* bash/scripts/*role*/*instance*.sh
 
 Make idempotent scripts!
 
