@@ -28,7 +28,7 @@ parse_yaml() {
 
 check_git() {
    if [ ! -e /usr/bin/git ]; then
-      if [ -e /etc/redhat_release ]; then
+      if [ -e /etc/redhat-release ]; then
          sudo /bin/yum -y install git && return 0
       elif [ -e /etc/debian_version ]; then
          sudo /usr/bin/apt-get -y install git && return 0
