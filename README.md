@@ -11,13 +11,24 @@ Multiple installers can be executed in the same host and at the same cron execut
 
 
 ## Installation
-
+### Github preparation (to be done only once when creating your own repos)
+* Clone both midonet/gitcmdb and midonet/github-data to your organization as private repos
+* Create a Github account for bot usage and add this user as readonly collaborator or in a readonly team to those two repos
+* Update in your gitcmdb repo your file `configs/default.yaml` to set your bot credentials in installerrepo variable like this:
 ```
-wget --quiet 'https://raw.githubusercontent.com/midonet/gitcmdb/master/gitcmdb?' -O - | bash -s <repo> <install folder>
+...
+installerrepo: https://USER:PASS@github.com/ORGANIZATION/gitcmdb-data
+...
+```
+* Optional: update this README.md file in your repo to update next section credentials to your bot credentials
+### Server installation (to be done in all servers only once when enrolling to gitcmdb)
+```
+wget --quiet 'https://raw.githubusercontent.com/midonet/gitcmdb/master/gitcmdb?' -O - | bash -s https://USER:PASSWORD@github.com/ORGANIZATION/gitcmdb
 ```
 where:
-* repo is your repo, default https://github.com/midonet/gitcmdb
-* install folder is where to clone the repo, by default /opt
+* ORGANIZATION is your Github organization
+* USER is your bot username
+* PASSWORD is yout bot password
 
 Supported Distributions:
 * Debian/Ubuntu
