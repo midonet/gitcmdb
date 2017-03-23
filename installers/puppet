@@ -7,7 +7,7 @@ echo Running puppet installer
 
 # check if puppet is installed
 if [ ! -e /usr/bin/puppet ]; then
-  if [ -e /etc/redhat_release ]; then
+  if [ -e /etc/redhat-release ]; then
     sudo /bin/yum -y install puppet
   elif [ -e /etc/debian_version ]; then
     sudo /usr/bin/apt-get -y install puppet
