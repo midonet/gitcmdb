@@ -72,6 +72,7 @@ if [ ! -e "$gitcmdb_path/gitcmdb_installer" ]; then
 elif [ `git --git-dir $gitcmdb_path/gitcmdb_installer/.git branch | grep \* | cut -d' ' -f2` = "$gitcmdb_branch" ]; then
    sudo git --git-dir "$gitcmdb_path/gitcmdb_installer/.git" --work-tree "$gitcmdb_path/gitcmdb_installer" pull | grep -v 'Already up-to-date' && export runinstaller=yes
 else
+   sudo git --git-dir "$gitcmdb_path/gitcmdb_installer/.git" --work-tree "$gitcmdb_path/gitcmdb_installer" fetch &&
    sudo git --git-dir "$gitcmdb_path/gitcmdb_installer/.git" --work-tree "$gitcmdb_path/gitcmdb_installer" checkout $gitcmdb_branch && export runinstaller=yes
 fi
 
