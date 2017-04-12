@@ -11,6 +11,8 @@ if [ ! -e /usr/bin/puppet ]; then
     sudo /bin/yum -y install puppet
   elif [ -e /etc/debian_version ]; then
     sudo /usr/bin/apt-get -y install puppet
+  elif [ -e /etc/system-release ]; then
+    sudo /usr/bin/yum -y install puppet
   else
      echo "Unsuported distribution"
      return 1

@@ -32,6 +32,8 @@ check_git() {
          sudo /bin/yum -y install git && return 0
       elif [ -e /etc/debian_version ]; then
          sudo /usr/bin/apt-get -y install git && return 0
+      elif [ -e /etc/system-release ]; then
+         sudo /usr/bin/yum -y install git && return 0
       else
          echo "Unsuported distribution"
          return 1
