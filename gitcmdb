@@ -70,7 +70,7 @@ if [ "$instance" != '' -a -e "$gitcmdb_path/gitcmdb/configs/$role/$instance.yaml
 
 # check if repo is downloaded in gitcmdb_path, if not install it, if yes update it and set runinstaller
 if [ ! -e "$gitcmdb_path/gitcmdb_installer" ]; then
-   sudo git clone "$gitcmdb_installerrepo" "$gitcmdb_path/gitcmdb_installer" && export runinstaller=yes
+   sudo git clone -b "$gitcmdb_branch" "$gitcmdb_installerrepo" "$gitcmdb_path/gitcmdb_installer" && export runinstaller=yes
 elif [ `git --git-dir $gitcmdb_path/gitcmdb_installer/.git branch | grep \* | cut -d' ' -f2` = "$gitcmdb_branch" ]; then
    sudo git --git-dir "$gitcmdb_path/gitcmdb_installer/.git" --work-tree "$gitcmdb_path/gitcmdb_installer" pull | grep -v 'Already up-to-date' && export runinstaller=yes
 else
