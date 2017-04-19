@@ -31,7 +31,7 @@ parse_yaml() {
 
 check_git() {
     if [ -z $(which git) ]; then
-        if [ -e /etc/redhat-release ]; then
+        if [ -e /etc/redhat-release -o -e /etc/system-release ]; then
             yum -y install git && return 0
         elif [ -e /etc/debian_version ]; then
             apt-get -y install git && return 0
@@ -80,7 +80,7 @@ else
 fi
 
 # Run specific installers if runinstaller==yes (all environment variables set)
-if [ "$runinstaller" = 'yes' -o $force_install = 'yes']; then
+if [ "$runinstaller" = 'yes' -o $force_install = 'yes' ]; then
    for gitcmdb_installer in $gitcmdb_installers; do
       source "$gitcmdb_path/gitcmdb/installers/$gitcmdb_installer"
    done
