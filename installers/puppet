@@ -8,6 +8,9 @@ echo Running puppet installer
 # check if puppet is installed
 if [ -z $(which puppet) ]; then
   if [ -e /etc/redhat-release ]; then
+      if [ -z "$(grep -i centos /etc/redhat-release)" ]; then
+          yum install -y epel-release
+      fi
     yum -y install puppet
   elif [ -e /etc/debian_version ]; then
     apt-get -y install puppet
