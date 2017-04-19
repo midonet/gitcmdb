@@ -79,7 +79,7 @@ elif [ `git branch | grep \* | cut -d' ' -f2` = "$gitcmdb_branch" ]; then
     git pull | grep -v 'Already up-to-date' && export runinstaller=yes
 else
     git fetch &&
-    git checkout checkout $gitcmdb_branch && export runinstaller=yes
+    git checkout $gitcmdb_branch && export runinstaller=yes
 fi
 cd
 
