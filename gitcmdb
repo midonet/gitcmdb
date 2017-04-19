@@ -57,12 +57,14 @@ export instance=`hostname | cut -d. -f1 | cut -d- -f2`
 mkdir -p "$gitcmdb_path" &&
 
 # Update or clone repo
+cd $gitcmdb_path/gitcmdb &>/dev/null
 check_git &&
 if [ -e "$gitcmdb_path/gitcmdb" ]; then
-   git --git-dir "$gitcmdb_path/gitcmdb/.git" --work-tree "$gitcmdb_path/gitcmdb" pull | grep -v 'Already up-to-date' && export setcron=yes
+   git pull | grep -v 'Already up-to-date' && export setcron=yes
 else
    git clone "$gitcmdb_repo" "$gitcmdb_path/gitcmdb" 2>&1 >/dev/null && export setcron=yes
 fi
+cd
 
 # Read configuration
 if [ -e "$gitcmdb_path/gitcmdb/configs/default.yaml" ]; then eval $(parse_yaml "$gitcmdb_path/gitcmdb/configs/default.yaml" "gitcmdb_"); fi
@@ -70,14 +72,16 @@ if [ "$role" != '' -a -e "$gitcmdb_path/gitcmdb/configs/$role/default.yaml" ]; t
 if [ "$instance" != '' -a -e "$gitcmdb_path/gitcmdb/configs/$role/$instance.yaml" ]; then eval $(parse_yaml "$gitcmdb_path/gitcmdb/configs/$role/$instance.yaml" "gitcmdb_"); fi
 
 # check if repo is downloaded in gitcmdb_path, if not install it, if yes update it and set runinstaller
+cd "$gitcmdb_path/gitcmdb_installer" &>/dev/null
 if [ ! -e "$gitcmdb_path/gitcmdb_installer" ]; then
-   git clone -b "$gitcmdb_branch" "$gitcmdb_installerrepo" "$gitcmdb_path/gitcmdb_installer" && export runinstaller=yes
-elif [ `git --git-dir $gitcmdb_path/gitcmdb_installer/.git branch | grep \* | cut -d' ' -f2` = "$gitcmdb_branch" ]; then
-   git --git-dir "$gitcmdb_path/gitcmdb_installer/.git" --work-tree "$gitcmdb_path/gitcmdb_installer" pull | grep -v 'Already up-to-date' && export runinstaller=yes
+    git clone -b "$gitcmdb_branch" "$gitcmdb_installerrepo" "$gitcmdb_path/gitcmdb_installer" && export runinstaller=yes
+elif [ `git branch | grep \* | cut -d' ' -f2` = "$gitcmdb_branch" ]; then
+    git pull | grep -v 'Already up-to-date' && export runinstaller=yes
 else
-   git --git-dir "$gitcmdb_path/gitcmdb_installer/.git" --work-tree "$gitcmdb_path/gitcmdb_installer" fetch &&
-   git --git-dir "$gitcmdb_path/gitcmdb_installer/.git" --work-tree "$gitcmdb_path/gitcmdb_installer" checkout $gitcmdb_branch && export runinstaller=yes
+    git fetch &&
+    git checkout checkout $gitcmdb_branch && export runinstaller=yes
 fi
+cd
 
 # Run specific installers if runinstaller==yes (all environment variables set)
 if [ "$runinstaller" = 'yes' -o "$force_install" = 'yes' ]; then
